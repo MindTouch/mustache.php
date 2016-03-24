@@ -166,11 +166,11 @@ class Mustache_Compiler
      *
      * @return string Generated PHP source code
      */
-    private function writeCode($tree, $name)
+    protected function writeCode($tree, $name)
     {
         $code     = $this->walk($tree);
         $sections = implode("\n", $this->sections);
-        $klass    = empty($this->sections) ? self::KLASS_NO_LAMBDAS : self::KLASS;
+        $klass    = empty($this->sections) ? static::KLASS_NO_LAMBDAS : static::KLASS;
         $callable = $this->strictCallables ? $this->prepare(self::STRICT_CALLABLE) : '';
 
         return sprintf($this->prepare($klass, 0, false, true), $name, $callable, $code, $sections);
@@ -242,7 +242,7 @@ class Mustache_Compiler
         $key    = ucfirst(md5($delims."\n".$source));
 
         if (!isset($this->sections[$key])) {
-            $this->sections[$key] = sprintf($this->prepare(self::SECTION), $key, $callable, $source, $delims, $this->walk($nodes, 2));
+            $this->sections[$key] = sprintf($this->prepare(static::SECTION), $key, $callable, $source, $delims, $this->walk($nodes, 2));
         }
 
         return sprintf($this->prepare(self::SECTION_CALL, $level), $id, $method, $id, $filters, $key);
@@ -293,7 +293,7 @@ class Mustache_Compiler
      *
      * @return string Generated partial call PHP source code
      */
-    private function partial($id, $indent, $level)
+    protected function partial($id, $indent, $level)
     {
         return sprintf(
             $this->prepare(self::PARTIAL, $level),
@@ -408,7 +408,7 @@ class Mustache_Compiler
      *
      * @return string PHP source code snippet
      */
-    private function prepare($text, $bonus = 0, $prependNewline = true, $appendNewline = false)
+    protected function prepare($text, $bonus = 0, $prependNewline = true, $appendNewline = false)
     {
         $text = ($prependNewline ? "\n" : '').trim($text);
         if ($prependNewline) {
