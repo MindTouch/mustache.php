@@ -563,7 +563,7 @@ class Mustache_Engine
     public function getTemplateClassName($source)
     {
         return $this->templateClassPrefix . md5(sprintf(
-            'version:%s,escape:%s,entity_flags:%i,charset:%s,strict_callables:%s,source:%s',
+            'version:%s,escape:%s,entity_flags:%d,charset:%s,strict_callables:%s,source:%s',
             self::VERSION,
             isset($this->escape) ? 'custom' : 'default',
             $this->entityFlags,
