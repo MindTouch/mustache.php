@@ -7,6 +7,15 @@ A [Mustache](http://mustache.github.com/) implementation in PHP.
 [![Build status](http://img.shields.io/travis/bobthecow/mustache.php/dev.svg)](http://travis-ci.org/bobthecow/mustache.php)
 [![Monthly downloads](http://img.shields.io/packagist/dm/mustache/mustache.svg)](https://packagist.org/packages/mustache/mustache)
 
+MindTouch Notes
+----
+
+This repo forked from `v2.6.0`. We added a commit to allow overriding these functions when extending `Mustache_Compiler` by changing them from `private` to `protected`:
+* `writeCode()`
+* `partial()`
+* `prepare()`
+
+We also added a fix for `sprintf()` using wrong identifier `%i` in `Mustache_Engine::getTemplateClassName()`. See [PR](https://github.com/MindTouch/mustache.php/pull/1).
 
 Usage
 -----
